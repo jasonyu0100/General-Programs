@@ -1,0 +1,19 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define LIMITER  6
+
+int diceroll();
+int main() {
+	int doubleDiceRoll = diceroll() + diceroll();
+	printf("DAN has rolled his fair die.\nIt rolled a %d\n", doubleDiceRoll);
+	return EXIT_SUCCESS;
+}
+
+int diceroll() {
+	time_t t;
+	srand((unsigned)time(&t));
+	int randomNumber = rand() % LIMITER + 1;
+	return randomNumber;
+}
