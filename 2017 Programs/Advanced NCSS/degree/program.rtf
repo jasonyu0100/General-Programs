@@ -1,0 +1,130 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf210
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\f0\fs24 \cf0 import csv\
+import operator\
+with open('degrees.csv') as f:\
+  #converts csv to dict\
+  student_university_admission = \{\}\
+  degrees = csv.DictReader(f)\
+  for degree in degrees:\
+    code = degree['code']\
+    name = degree['name']\
+    institution = degree['institution']\
+    places = int(degree['places'])\
+    temp_cutoff = '-'\
+    temp_offers = 0\
+    temp_student = []\
+    student_university_admission[code] = [name,institution,temp_cutoff,temp_offers,places,temp_student]\
+with open('students.csv') as f:\
+  #Converts CSV to dict\
+  student_dict = \{\}\
+  students = csv.DictReader(f)\
+  for student in students:\
+    name = student['name']\
+    score = float(student['score'])\
+    preferences = student['preferences'].split(';')\
+    current_university = ''\
+    student_dict[name] = [score,preferences,current_university]\
+\
+def student_details(student):\
+  #Gets student's details (atar,current_university_code)\
+  atar = student_dict[student][0]\
+  code = student_dict[student][1].pop(0).split('+')\
+  university_code = code[0]\
+  try:\
+    atar += float(code[1])\
+  except:\
+    pass\
+  if atar > 99.95:\
+    atar = 99.95\
+  return (atar,university_code)\
+\
+def course_admission(university_code,atar,student_name):\
+  #Returns a bool on whether a student can enter a university\
+  course_values = student_university_admission[university_code]\
+  if course_values[3] < course_values[4]:\
+    return True\
+  else:\
+    if atar >= course_values[2]:\
+      if student_university_admission[university_code][2] == atar:\
+        same_atar_students = [student_name]\
+        for student,student_atar in course_values[5]:\
+          if student_atar == atar:\
+            same_atar_students.append(student)\
+        if sorted(same_atar_students).pop() == student_name:\
+          return False\
+        else:\
+          return True\
+      else:\
+        return True\
+    else:\
+      return False\
+\
+#List of students to add to university\
+#Transfer students are added to list again\
+\
+stack = list(student_dict)\
+while len(stack) != 0:\
+  student = stack.pop()\
+  atar,university_code = student_details(student)\
+  course_admission_bool = course_admission(university_code,atar,student)\
+  if course_admission_bool is True:\
+    if student_university_admission[university_code][3] == student_university_admission[university_code][4]:\
+      min_atar_students = []\
+      for current_student,student_atar in student_university_admission[university_code][5]:\
+        if student_atar == student_university_admission[university_code][2]:\
+          min_atar_students.append(current_student)\
+      transfer_student = sorted(min_atar_students).pop()\
+      student_university_admission[university_code][5].remove((transfer_student,student_university_admission[university_code][2]))\
+      student_university_admission[university_code][3] -= 1\
+      if len(student_dict[transfer_student][1]) > 0:\
+        stack.append(transfer_student)\
+      else:\
+        student_dict[transfer_student][2] = '-'\
+    student_university_admission[university_code][3] += 1\
+    student_university_admission[university_code][5].append((student,atar))\
+    student_university_admission[university_code][2] = min(value[1] for value in student_university_admission[university_code][5])\
+    student_dict[student][2] = university_code\
+  else:\
+    if len(student_dict[student][1]) > 0:\
+      stack.append(student)\
+    else:\
+      student_dict[student][2] = '-'\
+\
+#Displays sorted university course\
+print('code,name,institution,cutoff,offers,vacancies')\
+for code in sorted(student_university_admission):\
+  name = student_university_admission[code][0]\
+  institution = student_university_admission[code][1]\
+  cutoff = student_university_admission[code][2]\
+  if isinstance(cutoff, (int,float)):\
+    cutoff = '%.2f'%cutoff\
+  offers = str(student_university_admission[code][3])\
+  vacancies = student_university_admission[code][4]-int(offers)\
+  if vacancies > 0:\
+    vacancy_bool = 'Y'\
+  else:\
+    vacancy_bool = 'N'\
+  print(','.join([code,name,institution,cutoff,offers,vacancy_bool]))\
+  \
+print()\
+\
+#Displays sorted student values\
+atar_dict = \{\}\
+for student_name in student_dict:\
+  atar = student_dict[student_name][0]\
+  if atar not in atar_dict:\
+    atar_dict[atar] = [student_name]\
+  else:\
+    atar_dict[atar].append(student_name)\
+atar_values = (sorted(atar_dict,reverse=True))\
+print('name,score,offer')\
+for atar in atar_values:\
+  for student in sorted(atar_dict[atar]):\
+    code = (student_dict[student][2])\
+    temp_atar = '%.2f'%atar\
+    print(','.join([student,temp_atar,code]))}

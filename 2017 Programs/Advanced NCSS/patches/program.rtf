@@ -1,0 +1,79 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf210
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\f0\fs24 \cf0 #Gets lines from file\
+lines = [line.strip() for line in open('patches.txt')]\
+\
+if lines == []:\
+    print('0 patches')\
+    quit()\
+\
+#Calculates Max line length\
+length = max([len(line) for line in lines])\
+\
+#Creates grid with extra dots\
+lines = [line+('.'*(length-len(line))) for line in lines]\
+\
+#Turns into list\
+lines = [list(line) for line in lines]\
+\
+# Paint is where the paint spots are\
+paint = set()\
+\
+# Where the paint spots have been checked to be a part of a patch\
+seen = set()\
+\
+#Getting the Paint spots\
+for y , line in enumerate(lines):\
+    for x,char in enumerate(line):\
+         if char == '%':\
+             paint.add((x,y))\
+                \
+\
+#Diretions\
+directions = [[0,-1] , [0,1] , [-1,0] , [1,0] , [1,1] , [1,-1] , [-1,1] , [-1,-1]]\
+\
+#Make Patches\
+patches = 0\
+\
+#Finds surrounding Paint\
+def cords(point):\
+    surrounding = [(point[0]+change[0],point[1]+change[1]) for change in directions]\
+    surrounding = [x for x in surrounding if x in paint]\
+    return surrounding\
+\
+#Main\
+for point in paint:\
+    \
+    #Checks to see if the point has been found as a part of a patch\
+    if point not in seen:\
+        stack = set()\
+        stack.add(point)\
+        \
+        #Creates a stack of points which the point is touching\
+        while stack:\
+            #Does first point\
+            temp = stack.pop()\
+            \
+            #Gets points back that have not been checked\
+            s2 = [x for x in cords(temp) if x not in seen]\
+\
+            #Adds the point to the stack\
+            for items in s2:\
+                if items not in stack:\
+                    stack.add(items)\
+            \
+            #The point has been checked now\
+            seen.add(temp)\
+\
+        patches += 1\
+\
+    \
+\
+if patches == 1:\
+  print(str(patches)+' patch')\
+else:\
+  print(str(patches)+' patches')}

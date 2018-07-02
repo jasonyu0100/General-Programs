@@ -1,0 +1,66 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf210
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\f0\fs24 \cf0 import string\
+import operator\
+import math\
+def word_lengths(file):\
+  word_len_frequencies = \{\}\
+  max_len = 0\
+  for line in file:\
+    for word in line.split():\
+      word = word.strip(string.punctuation)\
+      length = len(word)\
+      if length > max_len:\
+        max_len = length\
+      if length not in word_len_frequencies:\
+        word_len_frequencies[length] = 1\
+      else:\
+        word_len_frequencies[length] += 1\
+  frequencies = []\
+  for num in range(1,max_len+1):\
+    if num not in word_len_frequencies:\
+      frequencies.append(0)\
+    else:\
+      frequencies.append(word_len_frequencies[num])\
+  return frequencies\
+\
+def calculate_similarity(frequencies_1,frequencies_2):\
+  if len(frequencies_1) != len(frequencies_2):\
+    while len(frequencies_1) != len(frequencies_2):\
+      if len(frequencies_1) < len(frequencies_2):\
+        frequencies_1.append(0)\
+      else:\
+        frequencies_2.append(0)\
+        \
+  def top_value(frequencies_1,frequencies_2):\
+    products = []\
+    for freq_1,freq_2 in zip(frequencies_1,frequencies_2):\
+      products.append(freq_1*freq_2)\
+    return products\
+  def bottom_value(frequencies_1,frequencies_2):\
+    def calculate_freq_squares(frequency):\
+      squares = []\
+      for freq in frequency:\
+        squares.append(freq*freq)\
+      return squares\
+    rooted_freq_1 = math.sqrt(sum(calculate_freq_squares(frequencies_1)))\
+    rooted_freq_2 = math.sqrt(sum(calculate_freq_squares(frequencies_2)))\
+    return (rooted_freq_1*rooted_freq_2)\
+  top_value = sum(top_value(frequencies_1,frequencies_2))\
+  bottom_value = bottom_value(frequencies_1,frequencies_2)\
+  return round(top_value/bottom_value,3)\
+with open('unknown.txt') as file:\
+  unknown_file_frequencies = word_lengths(file)\
+frequency_text = \{\}\
+with open('texts.txt') as files:\
+  for line in files:\
+    with open(line.strip()) as file:\
+      file_frequency = word_lengths(file)\
+      frequency_text[' '+line.strip()] = calculate_similarity(file_frequency,unknown_file_frequencies)\
+sorted_frequency_text = sorted(frequency_text.items(), key=operator.itemgetter(1),reverse = True)\
+for text,value in sorted_frequency_text:\
+  print(value,end = text + '\\n')}

@@ -1,0 +1,33 @@
+Terminal
+cd - changes directory to given path
+python3 filename - opens file
+python3 - opens shell
+ls - shows contents 
+clear -clears screen
+
+Python Notes
+If you want to apply a function to a bunch of values
+list(map(int,[‘1’,’2’])) => [1,2]
+
+If you want to filter a list with booleans
+list(filter(lambda x:x%2==0,[2,4,5])) => [2,4]
+
+If you want to sort a list on something other than size
+sorted([[1,2,3],[2],[3]],key=lambda x:len(x)) => [[2], [3], [1, 2, 3]]
+
+set([1,2,3]) => {1,2,3}
+set([1,2,3]) | set([3,4,5]) => {1,2,3,4,5}
+set([1,2,3]) & set([3,4,5]) => {3}
+
+sum([1,2,3]) => 6
+max([1,2,3]) => 3
+min([1,2,3]) => 1
+
+f = lambda x:x%2==0
+f(5) == False
+f(4) == True
+
+for i in iterator:
+	stuff
+else:
+	#If loop is completed and not broken out of

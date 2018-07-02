@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "pixelcolor.h": "c",
+        "mandelbrot.h": "c"
+    }
+}

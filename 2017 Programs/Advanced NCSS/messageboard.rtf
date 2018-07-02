@@ -1,0 +1,66 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf210
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\f0\fs24 \cf0 from collections import defaultdict\
+\
+def ranking(upvotes):\
+  if upvotes == 0:\
+    return 'Insignificantly Evil'\
+  elif upvotes < 20:\
+    return 'Cautiously Evil'\
+  elif upvotes < 100:\
+    return 'Justifiably Evil'\
+  elif upvotes < 500:\
+    return 'Wickedly Evil'\
+  elif upvotes >= 500:\
+    return 'Diabolically Evil'\
+\
+\
+\
+def author_rankings(thread_list):\
+  # TODO: Determine (author, upvotes, ranking) over all threads.\
+\
+  author_votes = defaultdict(int)\
+  reports = []\
+  for thread in thread_list:\
+    for post in thread['posts']:\
+      author_votes[post['author']] += post['upvotes']\
+  for author in author_votes:\
+    upvotes = author_votes[author]\
+    rep_tuple = (author, upvotes, ranking(upvotes))\
+    reports.append(rep_tuple)\
+  reports.sort(key= lambda post: post[0])\
+  reports.sort(key= lambda post: post[1],reverse=True)\
+  \
+  return reports\
+\
+\
+if __name__ == '__main__':\
+  # Example calls to your function.\
+  print(author_rankings([\
+    \{\
+        'title': 'Invade Manhatten, anyone?',\
+        'tags': ['world-domination', 'hangout'],\
+        'posts': [\
+            \{\
+                'author': 'Mr. Sinister',\
+                'content': "I'm thinking 9 pm?",\
+                'upvotes': 2,\
+            \},\
+            \{\
+                'author': 'Mystique',\
+                'content': "Sounds fun!",\
+                'upvotes': 0,\
+            \},\
+            \{\
+                'author': 'Magneto',\
+                'content': "I'm in!",\
+                'upvotes': 0,\
+            \},\
+        ],\
+    \}\
+  ]))\
+}
