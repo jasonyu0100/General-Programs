@@ -1,1 +1,0 @@
-The napsack problem finds the most optimal combination of things with a given resource limit. It works by solving sub problems that eventually optimizes the process. This works in a grid like fashion.

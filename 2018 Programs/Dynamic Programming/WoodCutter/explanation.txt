@@ -1,1 +1,0 @@
-the wood cutter problem finds the most optimal sequence of cuts to cut a piece of wood and the cost associated. Each cut costs how much the length of the wood currently is. This problem can essentially be broken down into smaller versinos of itself.

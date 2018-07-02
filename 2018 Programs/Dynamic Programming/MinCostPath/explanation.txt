@@ -1,1 +1,0 @@
-the min cost path program finds the minimum cost required to move to a specific coordinate. It works backwards from the goal coordinate using the a recursive function to find the minimum cost

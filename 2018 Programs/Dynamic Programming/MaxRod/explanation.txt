@@ -1,1 +1,0 @@
-The max rod program finds the most optimal way to split up a rod of a certain length into pieces. Each specific length has a value associated and the goal of the programm is to maximise this value.
