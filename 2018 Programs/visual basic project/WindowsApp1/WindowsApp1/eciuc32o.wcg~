@@ -1,0 +1,111 @@
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+Partial Class FoodForm
+    Inherits System.Windows.Forms.Form
+
+    'Form overrides dispose to clean up the component list.
+    <System.Diagnostics.DebuggerNonUserCode()>
+    Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+        Try
+            If disposing AndAlso components IsNot Nothing Then
+                components.Dispose()
+            End If
+        Finally
+            MyBase.Dispose(disposing)
+        End Try
+    End Sub
+
+    'Required by the Windows Form Designer
+    Private components As System.ComponentModel.IContainer
+
+    'NOTE: The following procedure is required by the Windows Form Designer
+    'It can be modified using the Windows Form Designer.  
+    'Do not modify it using the code editor.
+    <System.Diagnostics.DebuggerStepThrough()>
+    Private Sub InitializeComponent()
+        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
+        Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ImportUsersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.txtBarcodeID = New System.Windows.Forms.TextBox()
+        Me.statusStripMenu = New System.Windows.Forms.StatusStrip()
+        Me.tStripUserName = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.stripStatus = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.MenuStrip1.SuspendLayout()
+        Me.statusStripMenu.SuspendLayout()
+        Me.SuspendLayout()
+        '
+        'MenuStrip1
+        '
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem})
+        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.MenuStrip1.Name = "MenuStrip1"
+        Me.MenuStrip1.Size = New System.Drawing.Size(681, 24)
+        Me.MenuStrip1.TabIndex = 1
+        Me.MenuStrip1.Text = "MenuStrip1"
+        '
+        'FileToolStripMenuItem
+        '
+        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportUsersToolStripMenuItem})
+        Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
+        Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
+        Me.FileToolStripMenuItem.Text = "File"
+        '
+        'ImportUsersToolStripMenuItem
+        '
+        Me.ImportUsersToolStripMenuItem.Name = "ImportUsersToolStripMenuItem"
+        Me.ImportUsersToolStripMenuItem.Size = New System.Drawing.Size(141, 22)
+        Me.ImportUsersToolStripMenuItem.Text = "Import Users"
+        '
+        'txtBarcodeID
+        '
+        Me.txtBarcodeID.Location = New System.Drawing.Point(122, 177)
+        Me.txtBarcodeID.Name = "txtBarcodeID"
+        Me.txtBarcodeID.Size = New System.Drawing.Size(385, 20)
+        Me.txtBarcodeID.TabIndex = 2
+        '
+        'statusStripMenu
+        '
+        Me.statusStripMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tStripUserName, Me.stripStatus})
+        Me.statusStripMenu.Location = New System.Drawing.Point(0, 382)
+        Me.statusStripMenu.Name = "statusStripMenu"
+        Me.statusStripMenu.Size = New System.Drawing.Size(681, 22)
+        Me.statusStripMenu.TabIndex = 3
+        Me.statusStripMenu.Text = "StatusStrip1"
+        '
+        'tStripUserName
+        '
+        Me.tStripUserName.Name = "tStripUserName"
+        Me.tStripUserName.Size = New System.Drawing.Size(120, 17)
+        Me.tStripUserName.Text = "ToolStripStatusLabel1"
+        '
+        'stripStatus
+        '
+        Me.stripStatus.Name = "stripStatus"
+        Me.stripStatus.Size = New System.Drawing.Size(120, 17)
+        Me.stripStatus.Text = "ToolStripStatusLabel1"
+        '
+        'FoodForm
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.ClientSize = New System.Drawing.Size(681, 404)
+        Me.Controls.Add(Me.statusStripMenu)
+        Me.Controls.Add(Me.txtBarcodeID)
+        Me.Controls.Add(Me.MenuStrip1)
+        Me.Name = "FoodForm"
+        Me.Text = "Form1"
+        Me.MenuStrip1.ResumeLayout(False)
+        Me.MenuStrip1.PerformLayout()
+        Me.statusStripMenu.ResumeLayout(False)
+        Me.statusStripMenu.PerformLayout()
+        Me.ResumeLayout(False)
+        Me.PerformLayout()
+
+    End Sub
+    Friend WithEvents MenuStrip1 As MenuStrip
+    Friend WithEvents FileToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ImportUsersToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents txtBarcodeID As TextBox
+    Friend WithEvents statusStripMenu As StatusStrip
+    Friend WithEvents tStripUserName As ToolStripStatusLabel
+    Friend WithEvents stripStatus As ToolStripStatusLabel
+End Class

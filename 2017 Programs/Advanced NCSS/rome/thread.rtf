@@ -1,0 +1,92 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf210
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\f0\fs24 \cf0 from exceptions import PermissionDenied\
+\
+\
+class Thread:\
+  def __init__(self, title, first_post):\
+    self.title = title\
+    self.first_post = first_post\
+    self.posts = []\
+    self.tags = []\
+    self.posts.append(first_post)\
+    """\
+    Creates a new thread with a title and an initial first post.\
+    The author of the first post at the time of thread creation is the owner of the thread.\
+    The owner cannot change once the thread is created.\
+    """\
+    pass\
+\
+  def get_owner(self):\
+    """\
+    Returns the owner of the thread.\
+    """\
+    return self.first_post.author\
+    pass\
+  \
+  def get_title(self):\
+    """\
+    Returns the title of the thread.\
+    """\
+    return self.title\
+  \
+  def get_tags(self):\
+    """\
+    Returns a sorted list of unique tags.\
+    """\
+    return self.tags\
+\
+  def get_posts(self):\
+    """\
+    Returns a list of Post objects in this thread, in the order they were published.\
+    """\
+    return self.posts\
+  \
+  def publish_post(self, post):\
+    """\
+    Adds the given Post object into the list of Posts in this thread.\
+    """\
+    self.posts.append(post)\
+    pass\
+  \
+  def remove_post(self, post, by_user):\
+    """\
+    Allows the given user to remove the Post from this thread.\
+    Does nothing if the Post is not in this thread.\
+    * raises PermissionDenied if the given user is not the author of the post.\
+    """\
+    if post.author != by_user:\
+      raise PermissionDenied\
+    elif post not in self.posts:\
+      pass\
+    else:\
+      try:\
+        self.posts.remove(post)\
+      except:\
+        pass\
+    pass\
+  \
+  def set_title(self, title, by_user):\
+    """\
+    Allows the given user to edit the thread title.\
+    * raises PermissionDenied if the given user is not the owner of the thread.\
+    """\
+    if self.first_post.author is not by_user:\
+      raise PermissionDenied\
+    self.title = title\
+    pass\
+  \
+  def set_tags(self, tag_list, by_user):\
+    """\
+    Allows the given user to replace the thread tags (list of strings).\
+    * raises PermissionDenied if the given user is not the owner of the thread.\
+    """\
+    if self.first_post.author is not by_user:\
+      raise PermissionDenied\
+    self.tags = sorted(list(set(tag_list)))\
+    pass\
+}

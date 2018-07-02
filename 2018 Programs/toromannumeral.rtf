@@ -1,0 +1,59 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf210
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\f0\fs24 \cf0 numberToRomanNumeralIndex = \{1000:'M',\
+                             500:'D',\
+                             100:'C',\
+                             50:'L',\
+                             10:'X',\
+                             5:'V',\
+                             1:'I'\
+                             \}\
+\
+num = input("Enter a number: ")\
+wholeRNumeral = ''\
+for baseMultiple in range(len(num)-1,-1,-1):\
+  rNumerals = ''\
+  literalNumber = int(num[len(num) - 1 - baseMultiple])\
+  numeral = 10**baseMultiple\
+  halfNumeral = int(numeral * 5)\
+  rNumeral = numberToRomanNumeralIndex[numeral]\
+  \
+  try:\
+    if halfNumeral not in numberToRomanNumeralIndex:\
+      raise KeyError\
+    secondaryRNumeral = numberToRomanNumeralIndex[halfNumeral]\
+  except KeyError:\
+    secondaryRNumeral = None\
+  \
+  if rNumeral == 'M':\
+    rNumerals += literalNumber * rNumeral\
+  else:\
+    if literalNumber == 0:\
+      pass\
+    elif literalNumber <= 3:\
+      rNumerals += literalNumber * rNumeral\
+    elif literalNumber == 4:\
+      rNumerals += rNumeral + secondaryRNumeral\
+    elif literalNumber == 5:\
+      rNumerals += secondaryRNumeral\
+    elif 5 < literalNumber < 9:\
+      rNumerals += secondaryRNumeral + rNumeral * (literalNumber - 5)\
+    elif literalNumber == 9:\
+      try:\
+        if numeral * 10 not in numberToRomanNumeralIndex:\
+          raise KeyError\
+        secondaryNumber = numberToRomanNumeralIndex[numeral * 10]\
+        rNumerals += rNumeral + secondaryNumber\
+      except KeyError:\
+        print("Error")\
+    else:\
+      print("Error")\
+    \
+  wholeRNumeral += rNumerals\
+\
+print(wholeRNumeral)\
+  }

@@ -1,0 +1,66 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf210
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\f0\fs24 \cf0 import copy\
+def get_grid():\
+  with open('maze.txt') as f:\
+    grid = [list(row.strip('\\n')) for row in f]\
+  return grid\
+def display_grid(grid):\
+  for row in grid:\
+    print(''.join(row))\
+def get_item_pos(grid):\
+  positions = []\
+  pacman_coord = None\
+  for pos_1,row in enumerate(grid):\
+    for pos_2,val in enumerate(row):\
+      if val == 'G':\
+        positions.append([pos_1,pos_2])\
+      elif val == 'P':\
+        pacman_coord = [pos_1,pos_2]\
+  return [positions,pacman_coord]\
+def recursive_route(goal_coord,routes,seen_squares,max_x,max_y,grid):\
+  direction_values = \{'up':(-1,0),'left':(0,-1),'down':(+1,0),'right':(0,+1)\}\
+  goal_bool = False\
+  goal_routes = []\
+  while goal_bool is False:\
+    route = routes.pop(0)\
+    last_square = route[-1]\
+    for direction,coordinate_change in direction_values.items():\
+      new_square = copy.deepcopy(last_square)\
+      new_square[0] += coordinate_change[0]\
+      new_square[1] += coordinate_change[1]\
+      if new_square in seen_squares:\
+        continue\
+      else:\
+        seen_squares.append(new_square)\
+      if 0 <= new_square[0] < max_x and 0 <= new_square[1] < max_y:\
+        if grid[new_square[0]][new_square[1]] == '#':\
+          continue\
+        routes.append(route+[new_square])\
+        if new_square == goal_coord:\
+          goal_bool = True\
+          goal_routes.append(route)\
+      else:\
+        continue\
+  return goal_routes\
+def update_path(grid):\
+  positions = get_item_pos(grid)\
+  ghost_positions = positions[0]\
+  pacman_coord = positions[1]\
+  max_x = len(grid)\
+  max_y = len(grid[0])\
+  for ghost in ghost_positions:\
+    routes = recursive_route(pacman_coord,[[ghost]],[],max_x,max_y,grid)\
+    start = routes[0][0]\
+    end = routes[0][1]\
+    grid[start[0]][start[1]] = ' '\
+    grid[end[0]][end[1]] = 'G'\
+  display_grid(grid)\
+  \
+grid = get_grid()\
+update_path(grid)  \
+}

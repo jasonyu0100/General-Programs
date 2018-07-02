@@ -1,0 +1,13 @@
+\\SR8137CF01-FS02\StudentUsers\2019\432518663\Desktop\Project\WindowsApp1\WindowsApp1\bin\Debug\WindowsApp1.exe.config
+\\SR8137CF01-FS02\StudentUsers\2019\432518663\Desktop\Project\WindowsApp1\WindowsApp1\bin\Debug\WindowsApp1.exe
+\\SR8137CF01-FS02\StudentUsers\2019\432518663\Desktop\Project\WindowsApp1\WindowsApp1\bin\Debug\WindowsApp1.pdb
+\\SR8137CF01-FS02\StudentUsers\2019\432518663\Desktop\Project\WindowsApp1\WindowsApp1\bin\Debug\WindowsApp1.xml
+\\SR8137CF01-FS02\StudentUsers\2019\432518663\Desktop\Project\WindowsApp1\WindowsApp1\obj\Debug\WindowsApp1.vbprojResolveAssemblyReference.cache
+\\SR8137CF01-FS02\StudentUsers\2019\432518663\Desktop\Project\WindowsApp1\WindowsApp1\obj\Debug\WindowsApp1.Resources.resources
+\\SR8137CF01-FS02\StudentUsers\2019\432518663\Desktop\Project\WindowsApp1\WindowsApp1\obj\Debug\WindowsApp1.vbproj.GenerateResource.Cache
+\\SR8137CF01-FS02\StudentUsers\2019\432518663\Desktop\Project\WindowsApp1\WindowsApp1\obj\Debug\WindowsApp1.vbproj.CoreCompileInputs.cache
+\\SR8137CF01-FS02\StudentUsers\2019\432518663\Desktop\Project\WindowsApp1\WindowsApp1\obj\Debug\WindowsApp1.exe
+\\SR8137CF01-FS02\StudentUsers\2019\432518663\Desktop\Project\WindowsApp1\WindowsApp1\obj\Debug\WindowsApp1.xml
+\\SR8137CF01-FS02\StudentUsers\2019\432518663\Desktop\Project\WindowsApp1\WindowsApp1\obj\Debug\WindowsApp1.pdb
+\\SR8137CF01-FS02\StudentUsers\2019\432518663\Desktop\Project\WindowsApp1\WindowsApp1\obj\Debug\WindowsApp1.RegistrationForm.resources
+\\SR8137CF01-FS02\StudentUsers\2019\432518663\Desktop\Project\WindowsApp1\WindowsApp1\obj\Debug\WindowsApp1.FoodMenu.resources
