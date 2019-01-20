@@ -1,15 +1,18 @@
-l = [3,-5,19,1,13,12,7,-1]
 import random
-big_l = [random.random() for i in range(1000)]
+l = [random.random() for i in range(1000)]
+from timer import timer
 
+@timer
 def quicksort(l):
+    return _quicksort(l)
+
+def _quicksort(l):
     if l == []: return []
-    pivot = l[-1]
+    pivot_index = int(len(l)/2)
+    pivot = l[pivot_index]
     less = []
     more = []
-    for val in l[:-1]:
+    for val in l[:pivot_index-1] + l[pivot_index+1:]:
         if val < pivot: less.append(val)
         else:more.append(val)
-    return quicksort(less) + [pivot] + quicksort(more)
-
-print(quicksort(big_l))
+    return _quicksort(less) + [pivot] + _quicksort(more)

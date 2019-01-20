@@ -1,5 +1,8 @@
-l = [5,2,1,3,1,2,5,7,90,1234,3,-5,5,3,887]
+import random
+l = [random.random() for i in range(1000)]
+from timer import timer
 
+@timer
 def insertion_sort(l):
     for current in range(1,len(l)):
         if l[current] < l[current-1]:
@@ -10,5 +13,3 @@ def insertion_sort(l):
             else:
                 l.insert(0,l.pop(current))
     return l
-
-insertion_sort(l)

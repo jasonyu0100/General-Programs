@@ -1,11 +1,16 @@
 import random
 l = [random.random() for i in range(1000)]
+from timer import timer
 
+@timer
 def mergesort(l):
+    return _mergesort(l)
+
+def _mergesort(l):
     if len(l) <= 1: return l
     split = int(len(l)/2)
-    left = mergesort(l[:split])
-    right = mergesort(l[split:])
+    left = _mergesort(l[:split])
+    right = _mergesort(l[split:])
     return merge(left,right)
 
 def merge(l1,l2):
@@ -19,6 +24,8 @@ def merge(l1,l2):
         else:
             new_list.append(l2.pop(0))
             ln2 -= 1
+
+        #Checks if one part has fully merged and then joins other part
         if ln1 == 0:
             new_list += l2
             break
@@ -26,5 +33,3 @@ def merge(l1,l2):
             new_list += l1
             break
     return new_list
-
-print(mergesort(l))
