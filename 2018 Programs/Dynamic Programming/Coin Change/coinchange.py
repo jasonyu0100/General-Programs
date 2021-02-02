@@ -66,8 +66,9 @@ def test(coinChange):
 		for line in f:
 			value = int(line)
 			combination = (coinChange(coins,value))
-			# numbers = set(combination)
-			#print(' '.join([':'.join(map(str,[number,combination.count(number)])) for number in numbers]))
+			if combination == None: combination = []
+			numbers = set(combination)
+			print(' '.join([':'.join(map(str,[number,combination.count(number)])) for number in numbers]))
 	end = time.time()
 	print(end - start)
 
